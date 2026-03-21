@@ -1,6 +1,7 @@
 <div align="center">
   <h1>Arithma</h1>
   <p><em>Developed by M.W</em></p>
+  <p><strong>Version:</strong> 1.26.1 | <strong>Build Status:</strong> Stable</p>
 </div>
 
 ---
