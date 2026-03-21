@@ -1,9 +1,6 @@
 <div align="center">
   <h1>Arithma</h1>
   <p><em>Developed by M.W</em></p>
-  <p>
-    <a href="https://arithma.vercel.app"><strong>View Live Demo</strong></a> 
-  </p>
 </div>
 
 ---
