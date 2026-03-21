@@ -1,0 +1,147 @@
+"use client";
+
+import { useSidebar } from "ui/sidebar";
+import { Tooltip, TooltipContent, TooltipTrigger } from "ui/tooltip";
+import { ChevronDown, PanelLeft } from "lucide-react";
+import { Button } from "ui/button";
+import { Separator } from "ui/separator";
+
+import { useEffect, useMemo } from "react";
+import { ThreadDropdown } from "../thread-dropdown";
+import { appStore } from "@/app/store";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useShallow } from "zustand/shallow";
+import { getShortcutKeyList, Shortcuts } from "lib/keyboard-shortcuts";
+import { useTranslations } from "next-intl";
+import { TextShimmer } from "ui/text-shimmer";
+import { buildReturnUrl } from "lib/admin/navigation-utils";
+import { BackButton } from "@/components/layouts/back-button";
+
+export function AppHeader() {
+  const t = useTranslations();
+  const [_appStoreMutate] = appStore(useShallow((state) => [state.mutate]));
+  const { toggleSidebar, open } = useSidebar();
+  const currentPaths = usePathname();
+  const searchParams = useSearchParams();
+
+  const componentByPage = useMemo(() => {
+    if (currentPaths.startsWith("/chat/")) {
+      return <ThreadDropdownComponent />;
+    }
+    if (
+      currentPaths.startsWith("/admin/users/") &&
+      currentPaths.split("/").length > 3
+    ) {
+      const searchPageParams = searchParams.get("searchPageParams");
+      const returnUrl = buildReturnUrl("/admin/users", searchPageParams || "");
+      return (
+        <BackButton
+          data-testid="admin-users-back-button"
+          returnUrl={returnUrl}
+          title={t("Admin.Users.backToUsers")}
+        />
+      );
+    }
+  }, [currentPaths, searchParams]);
+
+  return (
+    <header className="sticky top-0 z-50 flex items-center px-3 py-2">
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label="Toggle Sidebar"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              toggleSidebar();
+            }}
+            data-testid="sidebar-toggle"
+            data-state={open ? "open" : "closed"}
+          >
+            <PanelLeft />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent align="start" side="bottom">
+          <div className="flex items-center gap-2">
+            {t("KeyboardShortcuts.toggleSidebar")}
+            <div className="text-xs text-muted-foreground flex items-center gap-1">
+              {getShortcutKeyList(Shortcuts.toggleSidebar).map((key) => (
+                <span
+                  key={key}
+                  className="w-5 h-5 flex items-center justify-center bg-muted rounded "
+                >
+                  {key}
+                </span>
+              ))}
+            </div>
+          </div>
+        </TooltipContent>
+      </Tooltip>
+
+      {componentByPage}
+      <div className="flex-1" />
+    </header>
+  );
+}
+
+function ThreadDropdownComponent() {
+  const [threadList, currentThreadId, generatingTitleThreadIds] = appStore(
+    useShallow((state) => [
+      state.threadList,
+      state.currentThreadId,
+      state.generatingTitleThreadIds,
+    ]),
+  );
+  const currentThread = useMemo(() => {
+    return threadList.find((thread) => thread.id === currentThreadId);
+  }, [threadList, currentThreadId]);
+
+  useEffect(() => {
+    if (currentThread?.id) {
+      document.title = currentThread.title || "New Chat";
+    }
+  }, [currentThread?.id]);
+
+  if (!currentThread) return null;
+
+  return (
+    <div className="items-center gap-1 hidden md:flex">
+      <div className="w-1 h-4">
+        <Separator orientation="vertical" />
+      </div>
+
+      <ThreadDropdown
+        threadId={currentThread.id}
+        beforeTitle={currentThread.title}
+      >
+        <div>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                className="data-[state=open]:bg-input! hover:text-foreground cursor-pointer flex gap-1 items-center px-2 py-1 rounded-md hover:bg-accent"
+              >
+                {generatingTitleThreadIds.includes(currentThread.id) ? (
+                  <TextShimmer className="truncate max-w-60 min-w-0 mr-1">
+                    {currentThread.title || "New Chat"}
+                  </TextShimmer>
+                ) : (
+                  <p className="truncate max-w-60 min-w-0 mr-1">
+                    {currentThread.title || "New Chat"}
+                  </p>
+                )}
+
+                <ChevronDown size={14} />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent className="max-w-[200px] p-4 break-all overflow-y-auto max-h-[200px]">
+              {currentThread.title || "New Chat"}
+            </TooltipContent>
+          </Tooltip>
+        </div>
+      </ThreadDropdown>
+    </div>
+  );
+}

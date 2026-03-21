@@ -1,0 +1,143 @@
+﻿
+> math-bot@1.26.0 dev C:\Users\User\Downloads\math-bot
+> next dev
+
+node.exe : [baseline-browser-mapping] The 
+data in this module is over two months old. 
+ To ensure accurate Baseline data, please 
+update: `npm i 
+baseline-browser-mapping@latest -D`
+At C:\Users\User\AppData\Roaming\npm\pnpm.ps
+1:24 char:5
++     & "node$exe"  
+"$basedir/node_modules/pnpm/bin/pnpm.cjs" 
+$args
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: 
+    ([baseline-brows...ping@latest -D`:Str  
+  ing) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommand 
+   Error
+ 
+   Γû▓ Next.js 16.0.3 (Turbopack)
+   - Local:         http://localhost:3000
+   - Network:       http://192.168.1.6:3000
+   - Environments: .env
+
+ Γ£ô Starting...
+ΓÅ│ Running PostgreSQL migrations...
+Γ¥î PostgreSQL migrations failed. check the 
+postgres instance is running. undefined
+C:\Users\User\Downloads\math-bot\.next\dev\s
+erver\chunks\54001_drizzle-orm_12d1b855._.js
+: Invalid source map. Only conformant 
+source maps can be used to find the 
+original code. Cause: Error: sourceMapURL 
+could not be parsed
+C:\Users\User\Downloads\math-bot\.next\dev\s
+erver\chunks\[root-of-the-server]__42fa1aca.
+_.js: Invalid source map. Only conformant 
+source maps can be used to find the 
+original code. Cause: Error: sourceMapURL 
+could not be parsed
+C:\Users\User\Downloads\math-bot\.next\dev\s
+erver\chunks\src_ea89e954._.js: Invalid 
+source map. Only conformant source maps can 
+be used to find the original code. Cause: 
+Error: sourceMapURL could not be parsed
+C:\Users\User\Downloads\math-bot\node_module
+s\.pnpm\next@16.0.3_@opentelemetry+_3a23a8f6
+46cf08a50a02cbb7ec41fbf4\node_modules\next\d
+ist\server\lib\router-utils\instrumentation-
+globals.external.js: Invalid source map. 
+Only conformant source maps can be used to 
+find the original code. Cause: Error: 
+sourceMapURL could not be parsed
+C:\Users\User\Downloads\math-bot\node_module
+s\.pnpm\next@16.0.3_@opentelemetry+_3a23a8f6
+46cf08a50a02cbb7ec41fbf4\node_modules\next\d
+ist\server\dev\next-dev-server.js: Invalid 
+source map. Only conformant source maps can 
+be used to find the original code. Cause: 
+Error: sourceMapURL could not be parsed
+C:\Users\User\Downloads\math-bot\node_module
+s\.pnpm\next@16.0.3_@opentelemetry+_3a23a8f6
+46cf08a50a02cbb7ec41fbf4\node_modules\next\d
+ist\server\next-server.js: Invalid source 
+map. Only conformant source maps can be 
+used to find the original code. Cause: 
+Error: sourceMapURL could not be parsed
+C:\Users\User\Downloads\math-bot\node_module
+s\.pnpm\next@16.0.3_@opentelemetry+_3a23a8f6
+46cf08a50a02cbb7ec41fbf4\node_modules\next\d
+ist\server\next.js: Invalid source map. 
+Only conformant source maps can be used to 
+find the original code. Cause: Error: 
+sourceMapURL could not be parsed
+C:\Users\User\Downloads\math-bot\node_module
+s\.pnpm\next@16.0.3_@opentelemetry+_3a23a8f6
+46cf08a50a02cbb7ec41fbf4\node_modules\next\d
+ist\server\lib\render-server.js: Invalid 
+source map. Only conformant source maps can 
+be used to find the original code. Cause: 
+Error: sourceMapURL could not be parsed
+C:\Users\User\Downloads\math-bot\node_module
+s\.pnpm\next@16.0.3_@opentelemetry+_3a23a8f6
+46cf08a50a02cbb7ec41fbf4\node_modules\next\d
+ist\server\lib\router-server.js: Invalid 
+source map. Only conformant source maps can 
+be used to find the original code. Cause: 
+Error: sourceMapURL could not be parsed
+C:\Users\User\Downloads\math-bot\node_module
+s\.pnpm\next@16.0.3_@opentelemetry+_3a23a8f6
+46cf08a50a02cbb7ec41fbf4\node_modules\next\d
+ist\server\lib\start-server.js: Invalid 
+source map. Only conformant source maps can 
+be used to find the original code. Cause: 
+Error: sourceMapURL could not be parsed
+error: relation "academic_resource" already 
+exists
+    at async (C:\Users\User\Downloads\math-b
+ot\.next\dev\server\chunks\54001_drizzle-orm
+_12d1b855._.js:4881:25)
+    at async NodePgSession.transaction (C:\U
+sers\User\Downloads\math-bot\.next\dev\serve
+r\chunks\54001_drizzle-orm_12d1b855._.js:813
+9:28)
+    at async PgDialect.migrate (C:\Users\Use
+r\Downloads\math-bot\.next\dev\server\chunks
+\54001_drizzle-orm_12d1b855._.js:4877:9)
+    at async migrate (C:\Users\User\Download
+s\math-bot\.next\dev\server\chunks\54001_dri
+zzle-orm_12d1b855._.js:55:5)
+    at async runMigrate (C:\Users\User\Downl
+oads\math-bot\.next\dev\server\chunks\[root-
+of-the-server]__42fa1aca._.js:72:5)
+    at async Module.register (C:\Users\User\
+Downloads\math-bot\.next\dev\server\chunks\s
+rc_ea89e954._.js:126:13) {
+  length: 111,
+  severity: 'ERROR',
+  code: '42P07',
+  detail: undefined,
+  hint: undefined,
+  position: undefined,
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'heap.c',
+  line: '1160',
+  routine: 'heap_create_with_catalog'
+}
+[baseline-browser-mapping] The data in this 
+module is over two months old.  To ensure 
+accurate Baseline data, please update: `npm 
+i baseline-browser-mapping@latest -D`
+[?25h
+ΓÇëELIFECYCLEΓÇë Command failed with exit code 1.
