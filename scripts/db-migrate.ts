@@ -1,4 +1,3 @@
-import { colorize } from "consola/utils";
 import "load-env";
 
 const { runMigrate } = await import("lib/db/pg/migrate.pg");
