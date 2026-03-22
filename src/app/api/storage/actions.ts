@@ -11,7 +11,7 @@ export async function getStorageInfoAction() {
   return {
     type: storageDriver,
     supportsDirectUpload:
-      storageDriver === "vercel-blob" || storageDriver === "s3",
+      storageDriver === "vercel-blob" || storageDriver === "s3" || storageDriver === "supabase",
   };
 }
 
@@ -28,6 +28,22 @@ interface StorageCheckResult {
 export async function checkStorageAction(): Promise<StorageCheckResult> {
   // 1. Local storage - no configuration needed
   if (storageDriver === "local") {
+    return { isValid: true };
+  }
+
+  // 1.5 Supabase
+  if (storageDriver === "supabase") {
+    const missing: string[] = [];
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL) missing.push("NEXT_PUBLIC_SUPABASE_URL");
+    if (!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) missing.push("NEXT_PUBLIC_SUPABASE_ANON_KEY");
+
+    if (missing.length > 0) {
+      return {
+        isValid: false,
+        error: `Missing Supabase configuration: ${missing.join(", ")}`,
+        solution: "Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to your .env file.",
+      };
+    }
     return { isValid: true };
   }
 
@@ -75,13 +91,14 @@ export async function checkStorageAction(): Promise<StorageCheckResult> {
   }
 
   // 4. Validate storage driver
-  if (!["vercel-blob", "s3", "local"].includes(storageDriver)) {
+  if (!["vercel-blob", "s3", "local", "supabase"].includes(storageDriver)) {
     return {
       isValid: false,
       error: `Invalid storage driver: ${storageDriver}`,
       solution:
         "FILE_STORAGE_TYPE must be one of:\n" +
-        "- 'local' (default, no setup required)\n" +
+        "- 'supabase' (auto-selected if URL is present)\n" +
+        "- 'local' (default if no supabase URL, no setup required)\n" +
         "- 'vercel-blob'\n" +
         "- 's3'",
     };

@@ -6,14 +6,19 @@ import { createVercelBlobStorage } from "./vercel-blob-storage";
 import { createLocalFileStorage } from "./local-file-storage";
 import logger from "logger";
 
-export type FileStorageDriver = "vercel-blob" | "s3" | "local";
+export type FileStorageDriver = "vercel-blob" | "s3" | "local" | "supabase";
 
 const resolveDriver = (): FileStorageDriver => {
   const candidate = process.env.FILE_STORAGE_TYPE;
 
   const normalized = candidate?.trim().toLowerCase();
-  if (normalized === "vercel-blob" || normalized === "s3" || normalized === "local") {
-    return normalized;
+  if (normalized === "vercel-blob" || normalized === "s3" || normalized === "local" || normalized === "supabase") {
+    return normalized as FileStorageDriver;
+  }
+
+  // Fallback to supabase if URL exists, else local
+  if (process.env.NEXT_PUBLIC_SUPABASE_URL) {
+    return "supabase";
   }
 
   // Default to local storage
@@ -27,6 +32,8 @@ declare global {
 
 const storageDriver = resolveDriver();
 
+import { createSupabaseFileStorage } from "./supabase-file-storage";
+
 const createFileStorage = (): FileStorage => {
   logger.info(`Creating file storage: ${storageDriver}`);
   switch (storageDriver) {
@@ -34,6 +41,8 @@ const createFileStorage = (): FileStorage => {
       return createVercelBlobStorage();
     case "s3":
       return createS3FileStorage();
+    case "supabase":
+      return createSupabaseFileStorage();
     case "local":
       return createLocalFileStorage();
     default: {

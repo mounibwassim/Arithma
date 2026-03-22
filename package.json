@@ -77,6 +77,7 @@
     "@radix-ui/react-tabs": "^1.1.13",
     "@radix-ui/react-toggle": "^1.1.10",
     "@radix-ui/react-tooltip": "^1.2.8",
+    "@supabase/supabase-js": "^2.99.3",
     "@tiptap/extension-mention": "^2.27.1",
     "@tiptap/react": "^2.27.1",
     "@tiptap/starter-kit": "^2.27.1",
