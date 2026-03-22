@@ -18,7 +18,7 @@ import {
 
 const staticModels = {
   google: {
-    "gemini-2.0-flash": google("gemini-2.0-flash"),
+    "gemini-2.5-flash": google("gemini-2.5-flash"),
     "gemini-1.5-pro": google("gemini-1.5-pro"),
     "gemini-1.5-flash": google("gemini-1.5-flash"),
     "gemini-2.0-flash-lite": google("gemini-2.0-flash-lite-preview-02-05"),
@@ -46,7 +46,7 @@ const registerFileSupport = (
 
 // Google models
 registerFileSupport(
-  staticModels.google["gemini-2.0-flash"],
+  staticModels.google["gemini-2.5-flash"],
   GEMINI_FILE_MIME_TYPES,
 );
 registerFileSupport(
@@ -91,7 +91,7 @@ export const getFilePartSupportedMimeTypes = (model: LanguageModel) => {
   return staticFilePartSupportByModel.get(model) ?? [];
 };
 
-const fallbackModel = staticModels.google["gemini-1.5-flash"];
+const fallbackModel = staticModels.google["gemini-2.5-flash"];
 
 export const customModelProvider = {
   modelsInfo: Object.entries(allModels).map(([provider, models]) => ({
