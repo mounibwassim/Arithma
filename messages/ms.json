@@ -60,16 +60,16 @@
     "createWorkflow": "Cipta Aliran Kerja",
     "draft": "Draf",
     "publish": "Terbitkan",
-    "createWorkflowDescription": "Cipta aliran kerja sebagai alat berkuasa untuk chatbot anda.",
+    "createWorkflowDescription": "Cipta aliran kerja sebagai alat berkuasa untuk Arithma anda.",
     "workflowDescription": "Ini boleh dicetuskan semasa perbualan untuk mengautomasikan tugas kompleks.",
     "nameAndIcon": "Nama Dan Ikon",
-    "workflowNamePlaceholder": "Chatbot akan mengenali ini sebagai nama alat",
+    "workflowNamePlaceholder": "Arithma akan mengenali ini sebagai nama alat",
     "description": "Penerangan",
-    "descriptionPlaceholder": "Chatbot akan melihat ini sebagai penerangan alat",
+    "descriptionPlaceholder": "Arithma akan melihat ini sebagai penerangan alat",
     "inputNodeCannotBeDeleted": "Nod input tidak boleh dipadam",
     "autoSaveDescription": "Auto simpan setiap 10 saat",
-    "draftDescription": "Kini dalam Draf.\n\nKlik Terbitkan untuk menjadikannya tersedia kepada chatbot\n(tetapi tidak lagi boleh diedit).",
-    "publishedDescription": "Kini Diterbitkan dan tersedia kepada chatbot.\n\nKlik Draf untuk menjadikannya boleh diedit\n(tetapi tidak tersedia kepada chatbot).",
+    "draftDescription": "Kini dalam Draf.\n\nKlik Terbitkan untuk menjadikannya tersedia kepada Arithma\n(tetapi tidak lagi boleh diedit).",
+    "publishedDescription": "Kini Diterbitkan dan tersedia kepada Arithma.\n\nKlik Draf untuk menjadikannya boleh diedit\n(tetapi tidak tersedia kepada Arithma).",
     "private": "Peribadi",
     "readonly": "Baca Sahaja",
     "public": "Awam",
@@ -83,7 +83,7 @@
     "addNextNode": "Tambah Nod Seterusnya",
     "inputFields": "Medan Input",
     "addInputField": "Tambah Medan Input",
-    "inputFieldsDescription": "Tentukan skema parameter untuk aliran kerja ini.\n\nApabila chatbot menggunakan ini sebagai alat,\nia akan memberikan nilai mengikut skema ini.",
+    "inputFieldsDescription": "Tentukan skema parameter untuk aliran kerja ini.\n\nApabila Arithma menggunakan ini sebagai alat,\nia akan memberikan nilai mengikut skema ini.",
     "fieldEditor": "Editor Medan",
     "variableName": "Nama Pembolehubah",
     "variableNamePlaceholder": "Masukkan nama pembolehubah...",
@@ -122,15 +122,15 @@
     "greeting": {
       "buildAutomationTitle": "Bina Automasi dengan Menyambung Nod",
       "buildAutomationDescription": "Sambungkan pelbagai nod untuk mengautomasikan tugas kompleks. Setiap nod mengendalikan fungsi tertentu, dan data mengalir secara berurutan untuk pemprosesan.",
-      "chatbotToolTitle": "Gunakan sebagai Alat Chatbot",
-      "chatbotToolDescription": "Tujuan utama aliran kerja adalah untuk menggunakannya sebagai alat dalam perbualan chatbot. Tukarkan tugas berulang kepada aliran kerja untuk pelaksanaan mudah semasa sembang.",
+      "ArithmaToolTitle": "Gunakan sebagai Alat Arithma",
+      "ArithmaToolDescription": "Tujuan utama aliran kerja adalah untuk menggunakannya sebagai alat dalam perbualan Arithma. Tukarkan tugas berulang kepada aliran kerja untuk pelaksanaan mudah semasa sembang.",
       "parameterBasedTitle": "Bermula Berasaskan Parameter",
-      "parameterBasedDescription": "Nod input menentukan struktur parameter, bukan pencetus. Ia menentukan format data yang diperlukan apabila chatbot memanggil aliran kerja ini sebagai alat.",
+      "parameterBasedDescription": "Nod input menentukan struktur parameter, bukan pencetus. Ia menentukan format data yang diperlukan apabila Arithma memanggil aliran kerja ini sebagai alat.",
       "exampleTitle": "Contoh Penggunaan",
-      "exampleDescription": "Cipta aliran kerja \"Penulisan Emel → Terjemahan → Hantar\", kemudian laksanakan dengan mudah dalam perbualan chatbot dengan \"@email_workflow\".",
+      "exampleDescription": "Cipta aliran kerja \"Penulisan Emel → Terjemahan → Hantar\", kemudian laksanakan dengan mudah dalam perbualan Arithma dengan \"@email_workflow\".",
       "availableNodesTitle": "Nod Tersedia",
       "upcomingNodesTitle": "Nod Akan Datang",
-      "ctaMessage": "Mula cipta aliran kerja sekarang untuk meluaskan keupayaan chatbot anda!",
+      "ctaMessage": "Mula cipta aliran kerja sekarang untuk meluaskan keupayaan Arithma anda!",
       "soonMessage": "Akan datang tidak lama lagi."
     },
     "example": {
@@ -138,7 +138,7 @@
       "getWeather": "Dapatkan Cuaca"
     },
     "kindsDescription": {
-      "input": "Tentukan parameter input yang chatbot akan berikan apabila menggunakan aliran kerja ini sebagai alat.\n\nNyatakan struktur data dan peraturan pengesahan untuk pelaksanaan alat.",
+      "input": "Tentukan parameter input yang Arithma akan berikan apabila menggunakan aliran kerja ini sebagai alat.\n\nNyatakan struktur data dan peraturan pengesahan untuk pelaksanaan alat.",
       "output": "Kumpul dan kembalikan hasil akhir dari pelaksanaan aliran kerja anda.\n\nGabungkan data dari berbilang nod ke dalam respons alat akhir.",
       "llm": "Jana teks atau data berstruktur menggunakan model AI.\n\nRujuk output nod sebelumnya dengan sebutan '/' untuk mencipta respons sedar konteks.\n\nGunakan Output Berstruktur untuk mengubah, memformat, dan mengesahkan data - bukan hanya untuk penjanaan teks.",
       "tool": "Laksanakan alat MCP atau perkhidmatan luaran.\n\nTulis arahan dalam mesej, dan LLM akan menjana parameter alat yang diperlukan dari konteks anda.",
@@ -222,14 +222,14 @@
       "accountCreated": "Akaun anda telah berjaya dicipta!"
     },
     "Intro": {
-      "description": "Selamat datang ke Math-Chatbot. Log masuk untuk merasai alat Matematik perbualan dikuasakan AI kami."
+      "description": "Selamat datang ke Arithma. Log masuk untuk merasai alat Matematik perbualan dikuasakan AI kami."
     },
     "LoginPrompt": {
-      "title": "Selamat Datang ke Math-Chatbot",
+      "title": "Selamat Datang ke Arithma",
       "description": "Log masuk untuk menyimpan sejarah sembang anda dan mengakses semua ciri, atau teruskan sebagai tetamu untuk mencuba sistem sembang.",
       "signIn": "Log Masuk",
       "continueAsGuest": "Teruskan sebagai Tetamu",
-      "guestLimitations": "Sebagai tetamu, anda mempunyai akses terhad kepada sistem chatbot. Ciri-ciri seperti sejarah sembang, muat naik imej, alat akademik, dan tetapan memerlukan ",
+      "guestLimitations": "Sebagai tetamu, anda mempunyai akses terhad kepada sistem Arithma. Ciri-ciri seperti sejarah sembang, muat naik imej, alat akademik, dan tetapan memerlukan ",
       "guestLimitationsSignIn": "Log Masuk",
       "guestLimitationsSuffix": "."
     },
@@ -271,7 +271,7 @@
       "temporaryChatInstructionsPlaceholder": "Masukkan arahan anda di sini",
       "temporaryChatInstructionsDescription": "Anda boleh menetapkan arahan untuk sembang sementara. Ini akan digunakan sebagai arahan sistem untuk sembang sementara."
     },
-    "placeholder": "Tanya apa sahaja kepada Math-ChatBot",
+    "placeholder": "Tanya apa sahaja kepada Arithma",
     "Tool": {
       "webSearching": "Mencari di Web...",
       "searchedTheWeb": "Mencari di Web",
@@ -291,7 +291,7 @@
       "presetSaved": "Praset disimpan",
       "clickSaveAsPresetToGetStarted": "Klik Simpan Sebagai Praset untuk bermula.",
       "searchOptions": "Pilihan Carian",
-      "searchOptionsDescription": "Anda boleh menghantar pilihan carian kepada chatbot, seperti bilangan maksimum hasil carian, tarikh carian, dll.",
+      "searchOptionsDescription": "Anda boleh menghantar pilihan carian kepada Arithma, seperti bilangan maksimum hasil carian, tarikh carian, dll.",
       "defaultToolKit": {
         "visualization": "Visualisasi Data",
         "webSearch": "Cari di Web",
@@ -432,7 +432,7 @@
     "joinCommunity": "Sertai Komuniti",
     "survey": "Kaji Selidik",
     "signOutConfirmTitle": "Adakah anda pasti mahu log keluar?",
-    "signOutConfirmMessage": "Log keluar dari Math-Chatbot sebagai {email}?",
+    "signOutConfirmMessage": "Log keluar dari Arithma sebagai {email}?",
     "cancel": "Batal"
   },
   "Survey": {

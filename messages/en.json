@@ -60,16 +60,16 @@
     "createWorkflow": "Create Workflow",
     "draft": "Draft",
     "publish": "Publish",
-    "createWorkflowDescription": "Create workflows as powerful tools for your chatbot.",
+    "createWorkflowDescription": "Create workflows as powerful tools for your Arithma.",
     "workflowDescription": "These can be triggered during conversations to automate complex tasks.",
     "nameAndIcon": "Name And Icon",
-    "workflowNamePlaceholder": "Chatbot will recognize this as tool name",
+    "workflowNamePlaceholder": "Arithma will recognize this as tool name",
     "description": "Description",
-    "descriptionPlaceholder": "Chatbot will see this as tool description",
+    "descriptionPlaceholder": "Arithma will see this as tool description",
     "inputNodeCannotBeDeleted": "Input node cannot be deleted",
     "autoSaveDescription": "Auto saved every 10 seconds",
-    "draftDescription": "Currently in Draft.\n\nClick Publish to make it available to chatbot\n(but no longer editable).",
-    "publishedDescription": "Currently Published and available to chatbot.\n\nClick Draft to make it editable\n(but unavailable to chatbot).",
+    "draftDescription": "Currently in Draft.\n\nClick Publish to make it available to Arithma\n(but no longer editable).",
+    "publishedDescription": "Currently Published and available to Arithma.\n\nClick Draft to make it editable\n(but unavailable to Arithma).",
     "private": "Private",
     "readonly": "Read Only",
     "public": "Public",
@@ -83,7 +83,7 @@
     "addNextNode": "Add Next Node",
     "inputFields": "Input Fields",
     "addInputField": "Add Input Field",
-    "inputFieldsDescription": "Define the parameter schema for this workflow.\n\nWhen the chatbot uses this as a tool,\nit will provide values according to this schema.",
+    "inputFieldsDescription": "Define the parameter schema for this workflow.\n\nWhen the Arithma uses this as a tool,\nit will provide values according to this schema.",
     "fieldEditor": "Field Editor",
     "variableName": "Variable Name",
     "variableNamePlaceholder": "Enter variable name...",
@@ -122,15 +122,15 @@
     "greeting": {
       "buildAutomationTitle": "Build Automation by Connecting Nodes",
       "buildAutomationDescription": "Connect various nodes to automate complex tasks. Each node handles specific functions, and data flows sequentially for processing.",
-      "chatbotToolTitle": "Use as Chatbot Tools",
-      "chatbotToolDescription": "The main purpose of workflows is to use them as tools in chatbot conversations. Turn repetitive tasks into workflows for easy execution during chats.",
+      "ArithmaToolTitle": "Use as Arithma Tools",
+      "ArithmaToolDescription": "The main purpose of workflows is to use them as tools in Arithma conversations. Turn repetitive tasks into workflows for easy execution during chats.",
       "parameterBasedTitle": "Parameter-Based Start",
-      "parameterBasedDescription": "Input nodes define parameter structures, not triggers. They specify the data format needed when chatbot calls this workflow as a tool.",
+      "parameterBasedDescription": "Input nodes define parameter structures, not triggers. They specify the data format needed when Arithma calls this workflow as a tool.",
       "exampleTitle": "Usage Example",
-      "exampleDescription": "Create an \"Email Writing → Translation → Send\" workflow, then easily execute it in chatbot conversations with \"@email_workflow\".",
+      "exampleDescription": "Create an \"Email Writing → Translation → Send\" workflow, then easily execute it in Arithma conversations with \"@email_workflow\".",
       "availableNodesTitle": "Available Nodes",
       "upcomingNodesTitle": "Upcoming Nodes",
-      "ctaMessage": "Start creating workflows now to expand your chatbot's capabilities!",
+      "ctaMessage": "Start creating workflows now to expand your Arithma's capabilities!",
       "soonMessage": "Coming soon."
     },
     "example": {
@@ -138,7 +138,7 @@
       "getWeather": "Get Weather"
     },
     "kindsDescription": {
-      "input": "Define input parameters that the chatbot will provide when using this workflow as a tool.\n\nSpecify the data structure and validation rules for tool execution.",
+      "input": "Define input parameters that the Arithma will provide when using this workflow as a tool.\n\nSpecify the data structure and validation rules for tool execution.",
       "output": "Collect and return the final results from your workflow execution.\n\nCombine data from multiple nodes into the final tool response.",
       "llm": "Generate text or structured data using AI models.\n\nReference previous node outputs with '/' mentions to create context-aware responses.\n\nUse Structured Output to transform, format, and validate data - not just for text generation.",
       "tool": "Execute MCP tools or external services.\n\nWrite instructions in messages, and LLM will generate the required tool parameters from your context.",
@@ -222,14 +222,14 @@
       "accountCreated": "Your account has been created successfully!"
     },
     "Intro": {
-      "description": "Welcome to Math-Chatbot. Sign in to experience our AI-powered conversational math tools."
+      "description": "Welcome to Arithma. Sign in to experience our AI-powered conversational math tools."
     },
     "LoginPrompt": {
-      "title": "Welcome to Math-Chatbot",
-      "description": "Sign in to save your chat history and access all features, or continue as a guest to try out the chatbot system.",
+      "title": "Welcome to Arithma",
+      "description": "Sign in to save your chat history and access all features, or continue as a guest to try out the Arithma system.",
       "signIn": "Sign In",
       "continueAsGuest": "Continue as Guest",
-      "guestLimitations": "As a guest, you have limited access to the chatbot system. Features such as chat history, image uploads, academic tools, and settings require ",
+      "guestLimitations": "As a guest, you have limited access to the Arithma system. Features such as chat history, image uploads, academic tools, and settings require ",
       "guestLimitationsSignIn": "Sign-In",
       "guestLimitationsSuffix": "."
     },
@@ -273,7 +273,7 @@
       "temporaryChatInstructionsPlaceholder": "Enter your instructions here",
       "temporaryChatInstructionsDescription": "You can set instructions for the temporary chat. This will be used as a system prompt for the temporary chat."
     },
-    "placeholder": "Ask anything to Math-Chatbot",
+    "placeholder": "Ask anything to Arithma",
     "Tool": {
       "webSearching": "Searching the Web...",
       "searchedTheWeb": "Searched the Web",
@@ -293,7 +293,7 @@
       "presetSaved": "Preset saved",
       "clickSaveAsPresetToGetStarted": "Click Save As Preset to get started.",
       "searchOptions": "Search Options",
-      "searchOptionsDescription": "You can pass search options to the chatbot, such as the maximum number of search results, the search date, etc.",
+      "searchOptionsDescription": "You can pass search options to the Arithma, such as the maximum number of search results, the search date, etc.",
       "defaultToolKit": {
         "academicResources": "Academic Resources"
       }
@@ -350,7 +350,7 @@
       "professionExample3": "e.g. marketing manager",
       "professionExample4": "e.g. sales manager",
       "professionExample5": "e.g. business analyst",
-      "botNameExample1": "e.g. Math-Chatbot",
+      "botNameExample1": "e.g. Arithma",
       "botNameExample2": "e.g. Einstein",
       "botNameExample3": "e.g. Professor",
       "botNameExample4": "e.g. Tutor",
@@ -436,7 +436,7 @@
     "joinCommunity": "Join Community",
     "survey": "Survey",
     "signOutConfirmTitle": "Are you sure you want to sign out?",
-    "signOutConfirmMessage": "Sign out of Math-Chatbot as {email}?",
+    "signOutConfirmMessage": "Sign out of Arithma as {email}?",
     "cancel": "Cancel"
   },
   "Survey": {

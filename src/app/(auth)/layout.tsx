@@ -20,7 +20,7 @@ export default async function AuthLayout({
                 <Sigma className="size-5" />
               </div>
 
-              <span>Math-Chatbot</span>
+              <span>Arithma</span>
             </h1>
             <div className="flex-1" />
             <FlipWords

@@ -153,7 +153,7 @@
       "temporaryChatInstructionsPlaceholder": "在此输入您的说明",
       "temporaryChatInstructionsDescription": "您可以为临时聊天设置说明。这将用作临时聊天的系统提示。"
     },
-    "placeholder": "询问任何问题至 Math-Chatbot ",
+    "placeholder": "询问任何问题至 Arithma ",
     "Tool": {
       "webSearching": "正在搜索网络...",
       "searchedTheWeb": "搜索网络",
@@ -295,7 +295,7 @@
     "workflow": "工作流",
     "survey": "问卷调查",
     "signOutConfirmTitle": "您确定要登出吗？",
-    "signOutConfirmMessage": "以 {email} 身份登出 Math-Chatbot？",
+    "signOutConfirmMessage": "以 {email} 身份登出 Arithma？",
     "cancel": "取消"
   },
   "Survey": {
@@ -519,8 +519,8 @@
     "greeting": {
       "buildAutomationTitle": "通过连接节点构建自动化",
       "buildAutomationDescription": "连接各种节点来自动化复杂任务。每个节点处理特定功能，数据按顺序流动处理。",
-      "chatbotToolTitle": "用作聊天机器人工具",
-      "chatbotToolDescription": "工作流的主要目的是在聊天机器人对话中用作工具。将重复性任务转换为工作流，在聊天中轻松执行。",
+      "ArithmaToolTitle": "用作聊天机器人工具",
+      "ArithmaToolDescription": "工作流的主要目的是在聊天机器人对话中用作工具。将重复性任务转换为工作流，在聊天中轻松执行。",
       "parameterBasedTitle": "️ 基于参数的开始",
       "parameterBasedDescription": "输入节点定义参数结构，而不是触发器。它们指定聊天机器人将此工作流用作工具时所需的数据格式。",
       "exampleTitle": "使用示例",

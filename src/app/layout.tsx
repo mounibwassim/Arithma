@@ -19,8 +19,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Math-Chatbot",
-  description: "Math-Chatbot is a chatbot to answer Math's questions only.",
+  title: "Arithma",
+  description: "Arithma is a Arithma to answer Math's questions only.",
 };
 
 export default async function RootLayout({

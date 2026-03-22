@@ -406,7 +406,7 @@ export default function PromptInput({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [mentions.length, threadId, appStoreMutate, imageToolModel]);
 
-  // Drag overlay handled globally in ChatBot
+  // Drag overlay handled globally in Arithma
 
   return (
     <div className="max-w-3xl mx-auto fade-in animate-in">
@@ -741,7 +741,7 @@ export default function PromptInput({
         </fieldset>
         <div className="text-center text-xs text-muted-foreground mt-2 px-4">
           <span className="font-bold">
-            Math-Chatbot can make mistakes. Check important info.
+            Arithma can make mistakes. Check important info.
           </span>
         </div>
       </div>

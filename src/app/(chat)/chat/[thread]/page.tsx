@@ -1,5 +1,5 @@
 import { selectThreadWithMessagesAction } from "@/app/api/chat/actions";
-import ChatBot from "@/components/chat-bot";
+import Arithma from "@/components/chat-bot";
 
 import type { ChatMessage, ChatThread } from "app-types/chat";
 import { redirect, RedirectType } from "next/navigation";
@@ -19,5 +19,5 @@ export default async function Page({
 
   if (!thread) redirect("/", RedirectType.replace);
 
-  return <ChatBot threadId={threadId} initialMessages={thread.messages} />;
+  return <Arithma threadId={threadId} initialMessages={thread.messages} />;
 }

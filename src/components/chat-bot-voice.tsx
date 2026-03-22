@@ -67,7 +67,7 @@ const prependTools: EnabledTools[] = [
   },
 ];
 
-export function ChatBotVoice() {
+export function ArithmaVoice() {
   const t = useTranslations("Chat");
   const [
     agentId,

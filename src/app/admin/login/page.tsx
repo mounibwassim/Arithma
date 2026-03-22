@@ -3,7 +3,7 @@ import { getAdminSession } from "@/lib/admin/admin-auth";
 import { AdminLoginForm } from "@/components/admin/admin-login-form";
 
 export const metadata = {
-  title: "Math-Chatbot_Admin",
+  title: "Arithma_Admin",
 };
 
 export default async function AdminLoginPage() {

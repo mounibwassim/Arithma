@@ -41,7 +41,7 @@ import { DialogTitle } from "@radix-ui/react-dialog";
 import { Textarea } from "ui/textarea";
 import { Think } from "ui/think";
 
-export function ChatBotTemporary() {
+export function ArithmaTemporary() {
   const t = useTranslations("Chat.TemporaryChat");
 
   const [temporaryChat, appStoreMutate] = appStore(

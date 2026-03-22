@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import academicResourceRepository from "@/lib/db/pg/repositories/academic-resource-repository.pg";
 
-// GET - Search academic resources (for chatbot)
+// GET - Search academic resources (for Arithma)
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);

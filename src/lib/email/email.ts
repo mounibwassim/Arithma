@@ -63,7 +63,7 @@ export const sendPasswordResetEmail = async (
   email: string,
   resetUrl: string,
 ): Promise<boolean> => {
-  const appName = "Math-Chatbot";
+  const appName = "Arithma";
 
   // Extract token from URL for display as verification code
   const urlObj = new URL(resetUrl);

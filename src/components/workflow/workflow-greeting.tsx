@@ -45,10 +45,10 @@ export function WorkflowGreeting() {
           <div className="space-y-3">
             <h3 className="text-sm font-semibold">
               <Terminal className="size-4 inline-block mr-2" />
-              {t("Workflow.greeting.chatbotToolTitle")}
+              {t("Workflow.greeting.ArithmaToolTitle")}
             </h3>
             <p className="pl-6 text-xs text-muted-foreground leading-relaxed">
-              {t("Workflow.greeting.chatbotToolDescription")}
+              {t("Workflow.greeting.ArithmaToolDescription")}
             </p>
           </div>
 
