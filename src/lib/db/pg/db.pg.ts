@@ -7,7 +7,10 @@ import * as schema from "./schema.pg";
 //     console.log({ query, params });
 //   }
 // }
-export const pgDb = drizzlePg(process.env.POSTGRES_URL!, {
+
+const connectionString = process.env.DATABASE_URL || process.env.POSTGRES_URL;
+
+export const pgDb = drizzlePg(connectionString!, {
   schema,
   //   logger: new MyLogger(),
 });

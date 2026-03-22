@@ -13,12 +13,10 @@ import {
 } from "lib/db/pg/schema.pg";
 import { getAuthConfig } from "./config";
 import logger from "logger";
-import { userRepository } from "lib/db/repository";
 import { DEFAULT_USER_ROLE, USER_ROLES } from "app-types/roles";
 import { admin, editor, user, ac } from "./roles";
 
 const {
-  emailAndPasswordEnabled,
   signUpEnabled,
   socialAuthenticationProviders,
 } = getAuthConfig();
@@ -83,7 +81,7 @@ const options = {
     },
   },
   emailAndPassword: {
-    enabled: emailAndPasswordEnabled,
+    enabled: true, // EXPLICITLY SET AS REQUESTED
     disableSignUp: !signUpEnabled,
     resetPasswordTokenExpiresIn: 120, // 2 minutes
     sendResetPassword: async ({ user, url }) => {
@@ -165,18 +163,15 @@ export const getSession = async () => {
 let isFirstUserCache: boolean | null = null;
 
 export const getIsFirstUser = async () => {
-  // If we already know there's at least one user, return false immediately
-  // This in-memory cache prevents any DB calls once we know users exist
   if (isFirstUserCache === false) {
     return false;
   }
 
   try {
-    // Direct database query - simple and reliable
-    const userCount = await userRepository.getUserCount();
-    const isFirstUser = userCount === 0;
+    const { count } = await import("drizzle-orm");
+    const [result] = await pgDb.select({ count: count() }).from(UserTable);
+    const isFirstUser = result?.count === 0;
 
-    // Once we have at least one user, cache it permanently in memory
     if (!isFirstUser) {
       isFirstUserCache = false;
     }
@@ -184,7 +179,6 @@ export const getIsFirstUser = async () => {
     return isFirstUser;
   } catch (error) {
     logger.error("Error checking if first user:", error);
-    // Cache as false on error to prevent repeated attempts
     isFirstUserCache = false;
     return false;
   }
