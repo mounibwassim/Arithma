@@ -68,6 +68,10 @@ export const SUPPORTED_LOCALES = [
     code: "zh",
     name: "Chinese 🇨🇳",
   },
+  {
+    code: "ar",
+    name: "Arabic AR",
+  },
 ];
 
 export const BACKGROUND_COLORS = [

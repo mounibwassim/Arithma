@@ -143,12 +143,19 @@ export const getSession = async () => {
       headers: await headers(),
     });
     if (!session) {
-      logger.error("No session found");
       return null;
     }
     return session;
-  } catch (error) {
+  } catch (error: any) {
     logger.error("Error getting session:", error);
+    
+    // Prevent catching expected Next.js core errors
+    if (error?.message?.includes("NEXT_REDIRECT")) throw error;
+    if (error?.digest?.includes("NEXT_REDIRECT")) throw error;
+    if (error?.digest?.includes("DYNAMIC_SERVER_USAGE")) throw error;
+    
+    const { redirect } = await import("next/navigation");
+    redirect("/admin/login");
     return null;
   }
 };
