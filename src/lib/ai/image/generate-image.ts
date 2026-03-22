@@ -1,4 +1,3 @@
-// @ts-nocheck
 "use server";
 import {
   GoogleGenAI,
@@ -44,7 +43,7 @@ export async function generateImageWithOpenAI(
   options: GenerateImageOptions,
 ): Promise<GeneratedImageResult> {
   return experimental_generateImage({
-    model: openai.image("gpt-image-1-mini") as any,
+    model: openai.image("gpt-image-1-mini"),
     abortSignal: options.abortSignal,
     prompt: options.prompt,
   }).then((res) => {
@@ -64,7 +63,7 @@ export async function generateImageWithXAI(
   options: GenerateImageOptions,
 ): Promise<GeneratedImageResult> {
   return experimental_generateImage({
-    model: xai.image("grok-2-image") as any,
+    model: xai.image("grok-2-image"),
     abortSignal: options.abortSignal,
     prompt: options.prompt,
   }).then((res) => {

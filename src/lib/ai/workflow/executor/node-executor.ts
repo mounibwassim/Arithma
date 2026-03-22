@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { customModelProvider } from "lib/ai/models";
 import { generateUUID } from "lib/utils";
 import type {

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 
 /**
@@ -61,6 +60,6 @@ export function createAzureOpenAICompatible({
     });
 
     // Return the model (note: we pass an empty string since we already included the model in baseURL)
-    return provider("") as any;
+    return provider("");
   };
 }

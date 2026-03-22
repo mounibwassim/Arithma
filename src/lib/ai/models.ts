@@ -1,4 +1,3 @@
-// @ts-nocheck
 import "server-only";
 
 import { google } from "@ai-sdk/google";
@@ -36,7 +35,7 @@ const staticModels = {
   },
 };
 
-const staticUnsupportedModels = new Set<any>([]);
+const staticUnsupportedModels = new Set<LanguageModel>([]);
 
 const staticSupportImageInputModels = {
   ...staticModels.google,
@@ -44,7 +43,7 @@ const staticSupportImageInputModels = {
 };
 
 const staticFilePartSupportByModel = new Map<
-  any,
+  LanguageModel,
   readonly string[]
 >();
 
@@ -58,19 +57,19 @@ const registerFileSupport = (
 
 // Google models
 registerFileSupport(
-  staticModels.google["gemini-2.5-flash"] as any,
+  staticModels.google["gemini-2.5-flash"],
   GEMINI_FILE_MIME_TYPES,
 );
 registerFileSupport(
-  staticModels.google["gemini-1.5-pro"] as any,
+  staticModels.google["gemini-1.5-pro"],
   GEMINI_FILE_MIME_TYPES,
 );
 registerFileSupport(
-  staticModels.google["gemini-1.5-flash"] as any,
+  staticModels.google["gemini-1.5-flash"],
   GEMINI_FILE_MIME_TYPES,
 );
 registerFileSupport(
-  staticModels.google["gemini-2.0-flash-lite"] as any,
+  staticModels.google["gemini-2.0-flash-lite"],
   GEMINI_FILE_MIME_TYPES,
 );
 
@@ -82,24 +81,24 @@ const openaiCompatibleProviders = openaiCompatibleModelsSafeParse(
 const {
   providers: openaiCompatibleModels,
   unsupportedModels: openaiCompatibleUnsupportedModels,
-} = createOpenAICompatibleModels(openaiCompatibleProviders as any);
+} = createOpenAICompatibleModels(openaiCompatibleProviders);
 
 const allModels = { ...openaiCompatibleModels, ...staticModels };
 
-const allUnsupportedModels = new Set<any>([
+const allUnsupportedModels = new Set([
   ...openaiCompatibleUnsupportedModels,
   ...staticUnsupportedModels,
 ]);
 
-export const isToolCallUnsupportedModel = (model: any) => {
+export const isToolCallUnsupportedModel = (model: LanguageModel) => {
   return allUnsupportedModels.has(model);
 };
 
-const isImageInputUnsupportedModel = (model: any) => {
+const isImageInputUnsupportedModel = (model: LanguageModelV2) => {
   return !Object.values(staticSupportImageInputModels).includes(model);
 };
 
-export const getFilePartSupportedMimeTypes = (model: any) => {
+export const getFilePartSupportedMimeTypes = (model: LanguageModel) => {
   return staticFilePartSupportByModel.get(model) ?? [];
 };
 
@@ -116,9 +115,9 @@ export const customModelProvider = {
     })),
     hasAPIKey: checkProviderAPIKey(provider as keyof typeof staticModels),
   })),
-  getModel: (model?: ChatModel): any => {
+  getModel: (model?: ChatModel): LanguageModel => {
     if (!model) return fallbackModel;
-    return (allModels[model.provider]?.[model.model] || fallbackModel) as any;
+    return allModels[model.provider]?.[model.model] || fallbackModel;
   },
 };
 
