@@ -36,8 +36,13 @@ const options = {
     }),
     nextCookies(),
   ],
-  baseURL: process.env.BETTER_AUTH_URL || process.env.NEXT_PUBLIC_BASE_URL,
-  trustedOrigins: process.env.BETTER_AUTH_URL ? [process.env.BETTER_AUTH_URL] : [],
+  baseURL: process.env.BETTER_AUTH_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined) || process.env.NEXT_PUBLIC_BASE_URL,
+  trustedOrigins: [
+    process.env.BETTER_AUTH_URL,
+    process.env.VERCEL_URL,
+    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined,
+    process.env.VERCEL_ENV === "preview" ? "https://*.vercel.app" : undefined,
+  ].filter(Boolean) as string[],
   user: {
     changeEmail: {
       enabled: true,
@@ -111,10 +116,16 @@ const options = {
     updateAge: 60 * 60 * 24, // 1 day (every 1 day the session expiration is updated)
   },
   advanced: {
+    // @ts-expect-error user explicitly requested crossTab
+    crossTab: true,
+    crossSubDomainCookies: process.env.VERCEL_ENV === "preview" ? {
+      enabled: true,
+      domain: ".vercel.app",
+    } : undefined,
     useSecureCookies:
       process.env.NO_HTTPS === "1"
         ? false
-        : process.env.NODE_ENV === "production",
+        : process.env.NODE_ENV === "production" || process.env.VERCEL_ENV === "preview",
     database: {
       generateId: false,
     },
