@@ -1,7 +1,7 @@
 import "server-only";
 
 import { google } from "@ai-sdk/google";
-import { xai } from "@ai-sdk/xai";
+import { createOpenAI } from "@ai-sdk/openai";
 import type { LanguageModelV2 } from "@openrouter/ai-sdk-provider";
 import type { LanguageModel } from "ai";
 import {
@@ -17,6 +17,11 @@ import {
 // Native Google integration restored
 // Ollama and xAI removed as requested
 
+const xaiProvider = createOpenAI({
+  baseURL: "https://api.x.ai/v1",
+  apiKey: process.env.XAI_API_KEY,
+});
+
 const staticModels = {
   google: {
     "gemini-2.5-flash": google("gemini-2.5-flash"),
@@ -25,8 +30,8 @@ const staticModels = {
     "gemini-2.0-flash-lite": google("gemini-2.0-flash-lite"),
   },
   xai: {
-    "grok-2": xai("grok-2-1212"),
-    "grok-2-vision": xai("grok-2-vision-1212"),
+    "grok-2": xaiProvider("grok-2-1212"),
+    "grok-2-vision": xaiProvider("grok-2-vision-1212"),
   },
 };
 
