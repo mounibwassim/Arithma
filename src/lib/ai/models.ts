@@ -1,7 +1,7 @@
 import "server-only";
 
 import { google } from "@ai-sdk/google";
-import { createOpenAI } from "@ai-sdk/openai";
+
 import type { LanguageModelV2 } from "@openrouter/ai-sdk-provider";
 import type { LanguageModel } from "ai";
 import {
@@ -14,24 +14,11 @@ import {
   GEMINI_FILE_MIME_TYPES,
 } from "./file-support";
 
-// Native Google integration restored
-// Ollama and xAI removed as requested
 
-const xaiProvider = createOpenAI({
-  baseURL: "https://api.x.ai/v1",
-  apiKey: process.env.XAI_API_KEY,
-});
 
 const staticModels = {
   google: {
     "gemini-2.5-flash": google("gemini-2.5-flash"),
-    "gemini-1.5-pro": google("gemini-1.5-pro"),
-    "gemini-1.5-flash": google("gemini-1.5-flash"),
-    "gemini-2.0-flash-lite": google("gemini-2.0-flash-lite"),
-  },
-  xai: {
-    "grok-2": xaiProvider("grok-2-1212"),
-    "grok-2-vision": xaiProvider("grok-2-vision-1212"),
   },
 };
 
@@ -39,7 +26,6 @@ const staticUnsupportedModels = new Set<LanguageModel>([]);
 
 const staticSupportImageInputModels = {
   ...staticModels.google,
-  "grok-2-vision": staticModels.xai["grok-2-vision"]
 };
 
 const staticFilePartSupportByModel = new Map<
@@ -58,18 +44,6 @@ const registerFileSupport = (
 // Google models
 registerFileSupport(
   staticModels.google["gemini-2.5-flash"],
-  GEMINI_FILE_MIME_TYPES,
-);
-registerFileSupport(
-  staticModels.google["gemini-1.5-pro"],
-  GEMINI_FILE_MIME_TYPES,
-);
-registerFileSupport(
-  staticModels.google["gemini-1.5-flash"],
-  GEMINI_FILE_MIME_TYPES,
-);
-registerFileSupport(
-  staticModels.google["gemini-2.0-flash-lite"],
   GEMINI_FILE_MIME_TYPES,
 );
 
@@ -126,9 +100,6 @@ function checkProviderAPIKey(provider: keyof typeof staticModels) {
   switch (provider) {
     case "google":
       key = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
-      break;
-    case "xai":
-      key = process.env.XAI_API_KEY;
       break;
     default:
       return true; // assume the provider has an API key or is dynamic
