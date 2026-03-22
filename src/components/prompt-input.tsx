@@ -741,7 +741,7 @@ export default function PromptInput({
         </fieldset>
         <div className="text-center text-xs text-muted-foreground mt-2 px-4">
           <span className="font-bold">
-            Arithma can make mistakes. Check important info.
+            
           </span>
         </div>
       </div>
