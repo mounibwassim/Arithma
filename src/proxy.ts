@@ -11,9 +11,7 @@ export async function proxy(request: NextRequest) {
     return new Response("pong", { status: 200 });
   }
 
-  if (pathname === "/admin") {
-    return NextResponse.redirect(new URL("/admin/users", request.url));
-  }
+
 
   // Allow guest access - session check removed to enable unauthenticated access
   // const sessionCookie = getSessionCookie(request);
