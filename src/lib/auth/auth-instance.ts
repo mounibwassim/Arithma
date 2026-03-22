@@ -36,9 +36,7 @@ const options = {
     }),
     nextCookies(),
   ],
-  baseURL:
-    process.env.BETTER_AUTH_URL ||
-    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000"),
+  baseURL: typeof window !== "undefined" ? window.location.origin : process.env.BETTER_AUTH_URL,
   trustedOrigins: [
     "http://localhost:3000",
     process.env.BETTER_AUTH_URL,
@@ -121,7 +119,7 @@ const options = {
   advanced: {
     // @ts-expect-error user explicitly requested crossTab
     crossTab: true,
-    disableCsrfCheck: process.env.NODE_ENV === "development",
+    disableCsrfCheck: true,
     crossSubDomainCookies: process.env.VERCEL_ENV === "preview" ? {
       enabled: true,
       domain: ".vercel.app",
@@ -145,6 +143,9 @@ const options = {
   },
   socialProviders: socialAuthenticationProviders,
 } satisfies BetterAuthOptions;
+
+console.log("[Better Auth] Config baseURL:", options.baseURL);
+console.log("[Better Auth] Config trustedOrigins:", options.trustedOrigins);
 
 export const auth = betterAuth({
   ...options,
