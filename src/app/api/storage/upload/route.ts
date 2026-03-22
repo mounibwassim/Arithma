@@ -97,7 +97,7 @@ export async function POST(request: Request) {
     
     return NextResponse.json(
       { 
-        error: "Failed to upload file",
+        error: error instanceof Error ? `Failed to upload: ${error.message}` : "Failed to upload file",
         details: error instanceof Error ? error.message : String(error)
       },
       { status: 500 },
