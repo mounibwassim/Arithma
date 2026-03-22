@@ -1,6 +1,7 @@
 import "server-only";
 
 import { google } from "@ai-sdk/google";
+import { xai } from "@ai-sdk/xai";
 import type { LanguageModelV2 } from "@openrouter/ai-sdk-provider";
 import type { LanguageModel } from "ai";
 import {
@@ -21,7 +22,11 @@ const staticModels = {
     "gemini-2.5-flash": google("gemini-2.5-flash"),
     "gemini-1.5-pro": google("gemini-1.5-pro"),
     "gemini-1.5-flash": google("gemini-1.5-flash"),
-    "gemini-2.0-flash-lite": google("gemini-2.0-flash-lite-preview-02-05"),
+    "gemini-2.0-flash-lite": google("gemini-2.0-flash-lite"),
+  },
+  xai: {
+    "grok-2": xai("grok-2-1212"),
+    "grok-2-vision": xai("grok-2-vision-1212"),
   },
 };
 
@@ -29,6 +34,7 @@ const staticUnsupportedModels = new Set<LanguageModel>([]);
 
 const staticSupportImageInputModels = {
   ...staticModels.google,
+  "grok-2-vision": staticModels.xai["grok-2-vision"]
 };
 
 const staticFilePartSupportByModel = new Map<
@@ -115,6 +121,9 @@ function checkProviderAPIKey(provider: keyof typeof staticModels) {
   switch (provider) {
     case "google":
       key = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
+      break;
+    case "xai":
+      key = process.env.XAI_API_KEY;
       break;
     default:
       return true; // assume the provider has an API key or is dynamic
