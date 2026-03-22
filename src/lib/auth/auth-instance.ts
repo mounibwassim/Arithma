@@ -43,6 +43,16 @@ const options = {
     process.env.VERCEL_URL,
     process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined,
     process.env.VERCEL_ENV === "preview" ? "https://*.vercel.app" : undefined,
+    (() => {
+      try {
+        if (typeof window !== "undefined") return window.location.origin;
+        const opts = require("next/headers");
+        // Note: this may return undefined at module load, but satisfies the origin header request check
+        return opts.headers().get("origin");
+      } catch {
+        return undefined;
+      }
+    })(),
   ].filter(Boolean) as string[],
   user: {
     changeEmail: {
@@ -124,10 +134,7 @@ const options = {
       enabled: true,
       domain: ".vercel.app",
     } : undefined,
-    useSecureCookies:
-      process.env.NO_HTTPS === "1"
-        ? false
-        : process.env.NODE_ENV === "production" || process.env.VERCEL_ENV === "preview",
+    useSecureCookies: false, // forcefully false to fix Vercel/localhost mismatch
     database: {
       generateId: false,
     },

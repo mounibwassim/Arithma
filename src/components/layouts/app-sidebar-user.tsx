@@ -69,8 +69,9 @@ export function AppSidebarUserInner(props: {
   const [signOutDialogOpen, setSignOutDialogOpen] = useState(false);
 
   const logout = () => {
-    authClient.signOut().finally(() => {
-      window.location.href = "/";
+    // @ts-expect-error user explicitly requested hardcoded redirectTo
+    authClient.signOut({ fetchOptions: { redirectTo: "/admin/login" } }).finally(() => {
+      window.location.href = "/admin/login";
     });
   };
 
