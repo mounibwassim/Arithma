@@ -36,8 +36,11 @@ const options = {
     }),
     nextCookies(),
   ],
-  baseURL: process.env.BETTER_AUTH_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined) || process.env.NEXT_PUBLIC_BASE_URL,
+  baseURL:
+    process.env.BETTER_AUTH_URL ||
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000"),
   trustedOrigins: [
+    "http://localhost:3000",
     process.env.BETTER_AUTH_URL,
     process.env.VERCEL_URL,
     process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined,
@@ -118,6 +121,7 @@ const options = {
   advanced: {
     // @ts-expect-error user explicitly requested crossTab
     crossTab: true,
+    disableCsrfCheck: process.env.NODE_ENV === "development",
     crossSubDomainCookies: process.env.VERCEL_ENV === "preview" ? {
       enabled: true,
       domain: ".vercel.app",
