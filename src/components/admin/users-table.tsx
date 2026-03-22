@@ -331,8 +331,8 @@ export function UsersTable({
               {t("deleteUserTitle")}
             </AlertDialogTitle>
             <AlertDialogDescription className="space-y-3">
-              <p>{t("deleteUserConfirmation")}</p>
-              <p>
+              <div>{t("deleteUserConfirmation")}</div>
+              <div>
                 {t.rich("typeToConfirm", {
                   name: userToDelete?.name ?? "",
                   strong: (chunks) => (
@@ -341,7 +341,7 @@ export function UsersTable({
                     </span>
                   ),
                 })}
-              </p>
+              </div>
             </AlertDialogDescription>
           </AlertDialogHeader>
           <div className="py-4">

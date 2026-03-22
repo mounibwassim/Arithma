@@ -143,7 +143,10 @@ export async function getAdminSession(): Promise<AdminSession | null> {
  */
 export async function clearAdminSession(): Promise<void> {
   const cookieStore = await cookies();
-  cookieStore.delete(ADMIN_SESSION_COOKIE);
+  cookieStore.delete({
+    name: ADMIN_SESSION_COOKIE,
+    path: "/",
+  });
 }
 
 /**
