@@ -36,23 +36,10 @@ const options = {
     }),
     nextCookies(),
   ],
-  baseURL: typeof window !== "undefined" ? window.location.origin : process.env.BETTER_AUTH_URL,
+  baseURL: process.env.BETTER_AUTH_URL,
   trustedOrigins: [
-    "http://localhost:3000",
     process.env.BETTER_AUTH_URL,
-    process.env.VERCEL_URL,
-    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined,
-    process.env.VERCEL_ENV === "preview" ? "https://*.vercel.app" : undefined,
-    (() => {
-      try {
-        if (typeof window !== "undefined") return window.location.origin;
-        const opts = require("next/headers");
-        // Note: this may return undefined at module load, but satisfies the origin header request check
-        return opts.headers().get("origin");
-      } catch {
-        return undefined;
-      }
-    })(),
+    "http://localhost:3000",
   ].filter(Boolean) as string[],
   user: {
     changeEmail: {
@@ -130,11 +117,7 @@ const options = {
     // @ts-expect-error user explicitly requested crossTab
     crossTab: true,
     disableCsrfCheck: true,
-    crossSubDomainCookies: process.env.VERCEL_ENV === "preview" ? {
-      enabled: true,
-      domain: ".vercel.app",
-    } : undefined,
-    useSecureCookies: false, // forcefully false to fix Vercel/localhost mismatch
+    useSecureCookies: false,
     database: {
       generateId: false,
     },
