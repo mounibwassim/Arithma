@@ -1,75 +1,80 @@
-import nodemailer from "nodemailer";
 import logger from "logger";
+import nodemailer from "nodemailer";
 
 // Create transporter for sending emails
 const createTransporter = () => {
-  const host = process.env.SMTP_HOST;
-  const port = Number.parseInt(process.env.SMTP_PORT || "587");
-  const user = process.env.SMTP_USER;
-  const pass = process.env.SMTP_PASSWORD;
+	const host = process.env.SMTP_HOST;
+	const port = Number.parseInt(process.env.SMTP_PORT || "587");
+	const user = process.env.SMTP_USER;
+	const pass = process.env.SMTP_PASSWORD;
 
-  if (!host || !user || !pass) {
-    logger.warn("SMTP configuration is incomplete. Email sending is disabled.");
-    return null;
-  }
+	if (!host || !user || !pass) {
+		logger.warn("SMTP configuration is incomplete. Email sending is disabled.");
+		return null;
+	}
 
-  return nodemailer.createTransport({
-    host,
-    port,
-    secure: port === 465, // true for 465, false for other ports
-    auth: {
-      user,
-      pass,
-    },
-  });
+	return nodemailer.createTransport({
+		host,
+		port,
+		secure: port === 465, // true for 465, false for other ports
+		auth: {
+			user,
+			pass,
+		},
+	});
 };
 
 export interface SendEmailOptions {
-  to: string;
-  subject: string;
-  text?: string;
-  html?: string;
+	to: string;
+	subject: string;
+	text?: string;
+	html?: string;
 }
 
 export const sendEmail = async (
-  options: SendEmailOptions,
+	options: SendEmailOptions,
 ): Promise<boolean> => {
-  const transporter = createTransporter();
+	const transporter = createTransporter();
 
-  if (!transporter) {
-    logger.error("Cannot send email: SMTP not configured");
-    return false;
-  }
+	if (!transporter) {
+		logger.error("Cannot send email: SMTP not configured");
+		return false;
+	}
 
-  const from = process.env.SMTP_FROM || process.env.SMTP_USER;
+	const from = process.env.SMTP_FROM || process.env.SMTP_USER;
 
-  try {
-    await transporter.sendMail({
-      from,
-      to: options.to,
-      subject: options.subject,
-      text: options.text,
-      html: options.html,
-    });
-    logger.info(`Email sent successfully to ${options.to}`);
-    return true;
-  } catch (error) {
-    logger.error("Failed to send email:", error);
-    return false;
-  }
+	try {
+		await transporter.sendMail({
+			from,
+			to: options.to,
+			subject: options.subject,
+			text: options.text,
+			html: options.html,
+		});
+		logger.info(`Email sent successfully to ${options.to}`);
+		return true;
+	} catch (error) {
+		logger.error("Failed to send email:", error);
+		return false;
+	}
 };
 
 export const sendPasswordResetEmail = async (
-  email: string,
-  resetUrl: string,
+	email: string,
+	resetUrl: string,
 ): Promise<boolean> => {
-  const appName = "Arithma";
+	const appName = "Arithma";
 
-  // Extract token from URL for display as verification code
-  const urlObj = new URL(resetUrl);
-  const token = urlObj.pathname.split("/").pop() || "";
+	// Extract token from URL for display as verification code
+	const urlObj = new URL(resetUrl);
+	// Default better-auth URL structure: .../reset-password/[token]
+	// or sometimes .../reset-password?token=[token]
+	const token =
+		urlObj.searchParams.get("token") ||
+		urlObj.pathname.split("/").filter(Boolean).pop() ||
+		"";
 
-  const html = `
+	const html = `
     <!DOCTYPE html>
     <html>
     <head>
@@ -104,7 +109,7 @@ export const sendPasswordResetEmail = async (
     </html>
   `;
 
-  const text = `
+	const text = `
 Reset Your Password
 
 You requested to reset your password for ${appName}.
@@ -117,10 +122,10 @@ If you didn't request this, you can safely ignore this email.
 This code will expire in 2 minutes.
   `;
 
-  return sendEmail({
-    to: email,
-    subject: `Reset your ${appName} password`,
-    html,
-    text,
-  });
+	return sendEmail({
+		to: email,
+		subject: `Reset your ${appName} password`,
+		html,
+		text,
+	});
 };
