@@ -39,7 +39,10 @@ Arithma is built on a modern, type-safe Next.js foundation, utilizing the best t
 
 ### Backend & AI Providers
 - **SDK:** Vercel AI SDK
-- **Models:** Google Generative AI (Gemini), tightly integrated for reasoning.
+- **Models:**
+  - **Google Gemini:** Primary reasoning engine.
+  - **Groq (Cloud):** High-speed Llama 3.3/3.1 models.
+  - **Ollama (Local):** Local-first Llama 3.2/3.0 models for private development.
 - **Authentication:** Better Auth (Secure, Edge-compatible)
 
 ### Database
@@ -55,6 +58,9 @@ To run Arithma locally, create a `.env` file in the root directory and configure
 | Variable Name | Description | Required |
 | :--- | :--- | :--- |
 | `GOOGLE_GENERATIVE_AI_API_KEY` | Your Google Gemini API key to power the AI mathematical reasoning. | Yes |
+| `GROQ_API_KEY` | API key for Groq Cloud (Llama 3.3/3.1). | Yes (if using Groq) |
+| `OPENAI_COMPATIBLE_DATA` | JSON configuration for dynamic OpenAI-compatible providers (Ollama/Groq). | Yes |
+| `NEXT_PUBLIC_DEFAULT_MODEL` | The default model ID to use across the application. | No |
 | `POSTGRES_URL` | The direct PostgreSQL connection string (Supabase) for Drizzle ORM. | Yes |
 | `NEXT_PUBLIC_SUPABASE_URL` | The public URL of your Supabase deployment project. | Yes |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | The anonymous publishable key for your Supabase project. | Yes |

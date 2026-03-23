@@ -115,7 +115,7 @@ export class SafeRedisCache implements Cache {
 
   async get<T>(key: string): Promise<T | undefined> {
     return this.executeWithFallback(
-      () => this.redisCache!.get<T>(key),
+      () => this.redisCache?.get<T>(key),
       () => this.serverCache.get<T>(key),
       `get(${key})`,
     );
@@ -124,7 +124,7 @@ export class SafeRedisCache implements Cache {
   async set(key: string, value: unknown, ttlMs?: number): Promise<void> {
     return this.executeWithFallback(
       async () => {
-        await this.redisCache!.set(key, value, ttlMs);
+        await this.redisCache?.set(key, value, ttlMs);
         // Also set in memory cache as backup
         await this.serverCache.set(key, value, ttlMs);
       },
@@ -135,7 +135,7 @@ export class SafeRedisCache implements Cache {
 
   async has(key: string): Promise<boolean> {
     return this.executeWithFallback(
-      () => this.redisCache!.has(key),
+      () => this.redisCache?.has(key),
       () => this.serverCache.has(key),
       `has(${key})`,
     );
@@ -144,7 +144,7 @@ export class SafeRedisCache implements Cache {
   async delete(key: string): Promise<void> {
     return this.executeWithFallback(
       async () => {
-        await this.redisCache!.delete(key);
+        await this.redisCache?.delete(key);
         // Also delete from memory cache
         await this.serverCache.delete(key);
       },
@@ -156,7 +156,7 @@ export class SafeRedisCache implements Cache {
   async clear(): Promise<void> {
     return this.executeWithFallback(
       async () => {
-        await this.redisCache!.clear();
+        await this.redisCache?.clear();
         // Also clear memory cache
         await this.serverCache.clear();
       },
@@ -167,7 +167,7 @@ export class SafeRedisCache implements Cache {
 
   async getAll(): Promise<Map<string, unknown>> {
     return this.executeWithFallback(
-      () => this.redisCache!.getAll(),
+      () => this.redisCache?.getAll(),
       () => this.serverCache.getAll(),
       "getAll()",
     );

@@ -161,9 +161,22 @@ export function handleError(error: any) {
   if (LoadAPIKeyError.isInstance(error)) {
     return error.message;
   }
+
+  const errorMessage = error instanceof Error ? error.message : String(error);
+  
+  // Handle Gemini quota/rate limit errors
+  if (
+    errorMessage.includes("quota exceeded") || 
+    errorMessage.includes("rate limit") || 
+    errorMessage.includes("429")
+  ) {
+    logger.warn("Quota exceeded or rate limit hit:", errorMessage);
+    return "API Quota Exceeded. Please wait a moment before retrying or consider adding alternative free providers in your settings.";
+  }
+
   logger.error(error);
-  logger.error(`Route Error: ${error.name}`);
-  return errorToString(error.message);
+  logger.error(`Route Error: ${error.name || "Unknown Error"}`);
+  return errorToString(errorMessage);
 }
 
 export function extractInProgressToolPart(message: UIMessage): ToolUIPart[] {

@@ -365,7 +365,7 @@ export async function POST(request: Request) {
           system: systemPrompt,
           messages: convertToModelMessages(messages),
           experimental_transform: smoothStream({ chunking: "word" }),
-          maxRetries: 2,
+          maxRetries: 5,
           tools: vercelAITooles,
           stopWhen: stepCountIs(10),
           toolChoice: "auto",

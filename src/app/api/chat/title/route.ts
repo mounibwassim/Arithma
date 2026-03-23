@@ -36,17 +36,37 @@ export async function POST(request: Request) {
       `chatModel: ${chatModel?.provider}/${chatModel?.model}, threadId: ${threadId}`,
     );
 
+    // Fallback title generation if model fails or to save quota
+    const getFallbackTitle = (text: string) => {
+      const words = text.split(/\s+/).slice(0, 8).join(" ");
+      return words.length < text.length ? `${words}...` : words;
+    };
+
+    const model = customModelProvider.getModel(chatModel);
+    
+    // Check if we should even call the model (e.g., if message is too short)
+    if (message.length < 10) {
+      const title = getFallbackTitle(message);
+      chatRepository.upsertThread({
+        id: threadId,
+        title,
+        userId: session.user.id,
+      }).catch(err => logger.error(err));
+      return new Response(title);
+    }
+
     const result = streamText({
-      model: customModelProvider.getModel(chatModel),
+      model,
       system: CREATE_THREAD_TITLE_PROMPT,
       experimental_transform: smoothStream({ chunking: "word" }),
       prompt: message,
+      maxRetries: 1, // Minimize retries for non-essential title generation
       abortSignal: request.signal,
       onFinish: (ctx) => {
         chatRepository
           .upsertThread({
             id: threadId,
-            title: ctx.text,
+            title: ctx.text || getFallbackTitle(message),
             userId: session.user.id,
           })
           .catch((err) => logger.error(err));
