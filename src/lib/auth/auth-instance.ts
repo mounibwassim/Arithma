@@ -36,10 +36,17 @@ const options = {
     }),
     nextCookies(),
   ],
-  baseURL: process.env.BETTER_AUTH_URL,
+  baseURL:
+    process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}` 
+      : process.env.BETTER_AUTH_URL || "http://localhost:3000",
   trustedOrigins: [
     process.env.BETTER_AUTH_URL,
     "http://localhost:3000",
+    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined,
+    process.env.VERCEL_BRANCH_URL ? `https://${process.env.VERCEL_BRANCH_URL}` : undefined,
+    process.env.NEXT_PUBLIC_BASE_URL,
+    "https://*.vercel.app",
   ].filter(Boolean) as string[],
   user: {
     changeEmail: {
