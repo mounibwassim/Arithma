@@ -54,7 +54,11 @@ export const sendEmail = async (
 		logger.info(`Email sent successfully to ${options.to}`);
 		return true;
 	} catch (error) {
-		logger.error("Failed to send email:", error);
+		logger.error(`[Email] Failed to send email to ${options.to}:`, error);
+		if (error instanceof Error) {
+			logger.error(`[Email] Error message: ${error.message}`);
+			logger.error(`[Email] Error stack: ${error.stack}`);
+		}
 		return false;
 	}
 };
@@ -101,7 +105,7 @@ export const sendPasswordResetEmail = async (
             Copy the code above and paste it in the reset password page.
           </p>
           <p style="color: #999999; line-height: 1.6; font-size: 12px; margin-top: 24px;">
-            If you didn't request this, you can safely ignore this email. This code will expire in 2 minutes.
+            If you didn't request this, you can safely ignore this email. This code will expire in 10 minutes.
           </p>
         </div>
       </div>
@@ -119,7 +123,7 @@ Your verification code is: ${token}
 Copy this code and paste it in the reset password page.
 
 If you didn't request this, you can safely ignore this email.
-This code will expire in 2 minutes.
+This code will expire in 10 minutes.
   `;
 
 	return sendEmail({

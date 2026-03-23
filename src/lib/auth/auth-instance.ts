@@ -19,7 +19,7 @@ import { ac, admin, editor, user } from "./roles";
 const { signUpEnabled, socialAuthenticationProviders } = getAuthConfig();
 
 const options = {
-	secret: process.env.BETTER_AUTH_SECRET!,
+	secret: process.env.BETTER_AUTH_SECRET as string,
 	plugins: [
 		adminPlugin({
 			defaultRole: DEFAULT_USER_ROLE,
@@ -93,19 +93,24 @@ const options = {
 		disableSignUp: !signUpEnabled,
 		resetPasswordTokenExpiresIn: 600, // 10 minutes
 		sendResetPassword: async ({ user, url }) => {
-			logger.info(`Password reset requested for: ${user.email}`);
+			logger.info(`[Auth] Password reset requested for user: ${user.email}`);
+			logger.debug(`[Auth] Reset URL: ${url}`);
 			try {
+				logger.debug("[Auth] Importing email library...");
 				const { sendPasswordResetEmail } = await import("lib/email/email");
+				logger.debug("[Auth] Calling sendPasswordResetEmail...");
 				const success = await sendPasswordResetEmail(user.email, url);
 				if (success) {
 					logger.info(
-						`Password reset email sent successfully to: ${user.email}`,
+						`[Auth] Password reset email sent successfully to: ${user.email}`,
 					);
 				} else {
-					logger.error(`Failed to send password reset email to: ${user.email}`);
+					logger.error(
+						`[Auth] Failed to send password reset email to: ${user.email}`,
+					);
 				}
 			} catch (error) {
-				logger.error("Error sending password reset email:", error);
+				logger.error("[Auth] Error in sendResetPassword hook:", error);
 				throw error; // Re-throw to let better-auth know it failed
 			}
 		},
@@ -156,13 +161,16 @@ export const getSession = async () => {
 			return null;
 		}
 		return session;
-	} catch (error: any) {
+	} catch (error: unknown) {
 		logger.error("Error getting session:", error);
 
 		// Prevent catching expected Next.js core errors
-		if (error?.message?.includes("NEXT_REDIRECT")) throw error;
-		if (error?.digest?.includes("NEXT_REDIRECT")) throw error;
-		if (error?.digest?.includes("DYNAMIC_SERVER_USAGE")) throw error;
+		const errorMessage = error instanceof Error ? error.message : String(error);
+		const errorDigest = (error as { digest?: string })?.digest;
+
+		if (errorMessage.includes("NEXT_REDIRECT")) throw error;
+		if (errorDigest?.includes("NEXT_REDIRECT")) throw error;
+		if (errorDigest?.includes("DYNAMIC_SERVER_USAGE")) throw error;
 
 		const { redirect } = await import("next/navigation");
 		redirect("/admin/login");
