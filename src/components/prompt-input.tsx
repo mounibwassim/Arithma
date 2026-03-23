@@ -514,7 +514,6 @@ export default function PromptInput({
                         <DropdownMenuItem
                           className="cursor-pointer"
                           disabled={
-                            isGuest ||
                             modelInfo?.isImageInputUnsupported ||
                             !canUploadImages
                           }

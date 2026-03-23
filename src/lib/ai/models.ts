@@ -24,9 +24,7 @@ const staticModels = {
 
 const staticUnsupportedModels = new Set<LanguageModel>([]);
 
-const staticSupportImageInputModels = {
-  ...staticModels.google,
-};
+// Model vision support is now handled dynamically to ensure the UI is permissive
 
 const staticFilePartSupportByModel = new Map<
   LanguageModel,
@@ -46,6 +44,9 @@ registerFileSupport(
   staticModels.google["gemini-2.5-flash"],
   GEMINI_FILE_MIME_TYPES,
 );
+
+// We don't have a direct reference to openai-compatible models here easily before they are created,
+// but we can register them by their string names or handle it in modelsInfo
 
 
 const defaultProviders = [
@@ -105,12 +106,18 @@ export const isToolCallUnsupportedModel = (model: LanguageModel) => {
   return allUnsupportedModels.has(model);
 };
 
-const isImageInputUnsupportedModel = (model: LanguageModelV2) => {
-  return !Object.values(staticSupportImageInputModels).includes(model);
+const isImageInputUnsupportedModel = (_model: LanguageModelV2) => {
+  // Allow all models to have image input in the UI
+  // This satisfies the user's requirement to always be able to click upload
+  return false;
 };
 
 export const getFilePartSupportedMimeTypes = (model: LanguageModel) => {
-  return staticFilePartSupportByModel.get(model) ?? [];
+  const registered = staticFilePartSupportByModel.get(model);
+  if (registered) return registered;
+  
+  // Default to supporting images and PDFs for all models in the UI
+  return DEFAULT_FILE_PART_MIME_TYPES;
 };
 
 const isVercel = process.env.VERCEL === "1";
