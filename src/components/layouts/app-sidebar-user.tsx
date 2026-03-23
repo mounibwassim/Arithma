@@ -70,8 +70,8 @@ export function AppSidebarUserInner(props: {
 
   const logout = () => {
     // @ts-expect-error user explicitly requested hardcoded redirectTo
-    authClient.signOut({ fetchOptions: { redirectTo: "/admin/login" } }).finally(() => {
-      window.location.href = "/admin/login";
+    authClient.signOut({ fetchOptions: { redirectTo: "/" } }).finally(() => {
+      window.location.href = "/";
     });
   };
 
